@@ -22,7 +22,19 @@ class HomeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        return view('home');
+    {   
+        // $active_games = \App\Game::where('user_id', \Auth::user()->id)->get();
+        // $finished_games = \App\Game::where('user_id', \Auth::user()->id)->get();
+        $active_games = \App\Game::where([
+            ['user_id','=', \Auth::user()->id],
+            ['is_done','=',false]
+        ])->get();
+
+        $finished_games = \App\Game::where([
+            ['user_id','=', \Auth::user()->id],
+            ['is_done','=',true]
+        ])->get();
+        
+        return view('home', compact('active_games','finished_games'));
     }
 }

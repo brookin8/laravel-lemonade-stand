@@ -14,7 +14,39 @@
                         </div>
                     @endif
 
-                    You are logged in!
+
+<h2>My Games</h2>
+
+<p><a href="/games/create">Start a new game</a></p>
+
+<p><strong>Active Games</strong></p>
+<ul>
+    @foreach ($active_games as $game)
+        
+        <li><i class="fa fa-trash-o" aria-hidden="true"></i> <a href="/games/{{ $game->id }}">Game {{ $game->id }}</a></li>
+
+    @endforeach
+</ul>
+
+<p><strong>Finished Games</strong></p>
+<ul>
+    @foreach ($finished_games as $game)
+        
+        <li><!-- <i class="fa fa-trash-o" aria-hidden="true"></i> -->Game {{ $game->id }}</li>
+
+    @endforeach
+</ul>
+
+<h2>Leader Board</h2>
+
+<ul>
+    <li>Heath - $25,000</li>
+    <li>Mario - $12,000</li>
+    <li>Luigi - $8,000</li>
+</ul>
+
+
+
                 </div>
             </div>
         </div>
