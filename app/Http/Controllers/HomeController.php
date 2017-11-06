@@ -1,9 +1,6 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
 class HomeController extends Controller
 {
     /**
@@ -15,26 +12,21 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
-
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        // $active_games = \App\Game::where('user_id', \Auth::user()->id)->get();
-        // $finished_games = \App\Game::where('user_id', \Auth::user()->id)->get();
+    {
         $active_games = \App\Game::where([
-            ['user_id','=', \Auth::user()->id],
-            ['is_done','=',false]
+            ['user_id', '=', \Auth::user()->id],
+            ['is_done', '=', false]
         ])->get();
-
         $finished_games = \App\Game::where([
-            ['user_id','=', \Auth::user()->id],
-            ['is_done','=',true]
+            ['user_id', '=', \Auth::user()->id],
+            ['is_done', '=', true]
         ])->get();
-        
-        return view('home', compact('active_games','finished_games'));
+        return view('home', compact('active_games', 'finished_games'));
     }
 }

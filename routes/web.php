@@ -14,12 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
-
-//COVERS ALL RESOURCEFUL!!
-Route::resource('/games', 'GameController');
-//OR 
-//Route::resource('/games', 'GameController@index');
+Route::get('days/create/{id}', [
+		'uses' => 'DayController@create'
+]);
+Route::resource('/days', 'DayController', ['except' => 'create']);
+Route::resource('games', 'GameController');
+Route::get('games/{id}', 'GameController@show')->name('game');
+Route::get('games/destroy/{id}', 'GameController@destroy')->name('game');
